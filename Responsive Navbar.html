@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://127.0.0.1:5500/index.html#contact -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #222;
+            padding: 15px 30px;
+            color: white;
+        }
+
+        .navbar-brand {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a,
+        .dropdown-btn {
+            color: white;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .dropdown-btn:hover {
+            color: #00d4ff;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            background: white;
+            min-width: 160px;
+            box-shadow: 0 4px 8px #0003;
+            border-radius: 5px;
+            z-index: 10;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            color: #222;
+            padding: 12px;
+        }
+
+        .dropdown-menu a:hover {
+            background: #eee;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+
+        .search {
+            display: flex;
+            gap: 8px;
+        }
+
+        .search input {
+            padding: 9px;
+            border: none;
+            border-radius: 5px;
+            width: 150px;
+        }
+
+        .search button {
+            padding: 9px 12px;
+            background: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            color: white;
+            border: none;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                padding-top: 20px;
+                gap: 20px;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                margin-top: 10px;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .search input {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        
+
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation" aria-expanded="false">
+            ☰
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="http://127.0.0.1:5500/index.html#home">Home</a>
+            <a href="http://127.0.0.1:5500/index.html#about">About</a>
+
+            <div class="dropdown">
+                <button class="dropdown-btn">Services ▾</button>
+                <div class="dropdown-menu">
+                    <a href="http://127.0.0.1:5500/index.html#design">Web Design</a>
+                    <a href="http://127.0.0.1:5500/index.html#development">Development</a>
+                    <a href="http://127.0.0.1:5500/index.html#marketing">Marketing</a>
+                </div>
+            </div>
+
+            <a href="http://127.0.0.1:5500/index.html#contact">Contact</a>
+
+            <form class="search" onsubmit="searchSite(event)">
+                <input type="search" id="searchInput" placeholder="Search..." aria-label="Search">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <script>
+        function toggleMenu() {
+            const links = document.getElementById("navLinks");
+            const button = document.querySelector(".menu-toggle");
+
+            links.classList.toggle("show");
+            button.setAttribute(
+                "aria-expanded",
+                links.classList.contains("show")
+            );
+        }
+
+        function searchSite(event) {
+            event.preventDefault();
+            const query = document.getElementById("searchInput").value.trim();
+
+            if (query) {
+                alert("You searched for: " + query);
+            }
+        }
+    </script>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
